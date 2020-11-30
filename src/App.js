@@ -1,25 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import styled from 'styled-components';
+import GlobalStyles from './components/GlobalStyles';
+import { TaskCreator } from './components/TaskCreator';
+import { TaskList } from './components/TaskList';
+import { Actions } from './components/Actions';
+import { useTasks } from './components/hooks/useTasks';
 
-function App() {
+const Container = styled.div`
+  display: grid;
+  place-items: center;
+  height: 100%;
+`;
+
+const Main = styled.div`
+  min-width: 1000px;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 50px 100px;
+  background-color: #d6b6e2;
+  border-radius: 7px;
+`;
+
+const App = () => {
+
+  const myTasks = useTasks([]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container>
+      <GlobalStyles whiteColor />
+      <Main>
+        <TaskCreator {...myTasks} />
+        <hr />
+        <TaskList />
+        <hr />
+        <Actions />
+      </Main>
+      
+    </Container>
   );
 }
-
+  
 export default App;
